@@ -17,8 +17,14 @@ app = FastAPI(title="AgentFlow API - Persistence Layer")
 def on_startup():
     create_db_and_tables()
 
+origins = [
+    "https://agent-flow-brown-omega.vercel.app", # URL de Produção
+    "http://localhost:3000",                  # Desenvolvimento local
+]
+
 app.add_middleware(
     CORSMiddleware,
+    allow_credentials=True,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
