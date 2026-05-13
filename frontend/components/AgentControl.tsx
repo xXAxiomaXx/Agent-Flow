@@ -6,6 +6,7 @@ import { Play, Loader2, CheckCircle } from 'lucide-react';
 export default function AgentControl() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'running' | 'success'>('idle');
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const startAgent = async () => {
     setLoading(true);
@@ -13,7 +14,7 @@ export default function AgentControl() {
 
     try {
       // Chamamos a API via localhost (porque o browser do usuário que faz a requisição)
-      const res = await fetch('http://localhost:8000/run-agent/WebScraper-01', {
+      const res = await fetch(`${API_URL}/run-agent/WebScraper-01`, {
         method: 'POST',
       });
 
