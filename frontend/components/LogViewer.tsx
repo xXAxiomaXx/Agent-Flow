@@ -6,10 +6,11 @@ import { Terminal } from 'lucide-react';
 export default function LogViewer() {
   const [logs, setLogs] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
     // Conecta ao WebSocket do FastAPI
-    const socket = new WebSocket('ws://localhost:8000/ws/logs');
+    const socket = new WebSocket(`${API_URL}/ws/logs`);
 
     socket.onmessage = (event) => {
       setLogs((prev) => [...prev, event.data]);
