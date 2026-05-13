@@ -15,11 +15,12 @@ interface Job {
 export default function JobHistory() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const fetchJobs = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/jobs');
+      const res = await fetch(`${API_URL}/jobs`);
       const data = await res.json();
       setJobs(data);
     } catch (error) {
