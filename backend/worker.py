@@ -7,8 +7,9 @@ from datetime import datetime
 from sqlmodel import Session
 from models import engine, AgentJob # Importamos a conexão e o modelo
 
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
 # Conexão síncrona para o Worker
-redis_client = redis.from_url(os.getenv("REDIS_URL", "redis://redis:6379/0"))
+redis_client = redis.from_url(REDIS_URL, decode_responses=True)
 
 celery_app = Celery(
     "worker",
